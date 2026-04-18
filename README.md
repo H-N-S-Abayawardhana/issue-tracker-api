@@ -27,7 +27,6 @@ backend/
 │   ├── routes/          # Route definitions
 │   ├── services/        # Business logic + DB queries
 │   ├── utils/           # Response + pagination helpers
-│   └── db/              # seed.ts script
 ├── tsconfig.json
 ├── .env.example
 └── package.json
@@ -53,15 +52,7 @@ JWT_EXPIRES_IN=7d
 FRONTEND_URL=http://localhost:5173
 ```
 
-### 3. Seed demo data (optional)
-
-```bash
-yarn seed
-```
-
-This creates 3 users and 10 sample issues. All users have password `Password123!`.
-
-### 4. Start the server
+### 3. Start the server
 
 ```bash
 # Development (TypeScript, auto-reload)
@@ -101,10 +92,3 @@ API runs at `http://localhost:5000`.
 ### Query params for `GET /api/issues`
 
 `?page=1&limit=10&search=login&status=Open&priority=High&severity=Major`
-
-## Demo login (after `yarn seed`)
-
-```
-Email:    alice@example.com
-Password: Password123!
-```

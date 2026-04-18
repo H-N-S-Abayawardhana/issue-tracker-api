@@ -73,9 +73,8 @@ function formatIssue(doc: IIssue & { created_by?: unknown; assigned_to?: unknown
   return obj;
 }
 
-// ------------------------------------------------------------------ //
 //  LIST
-// ------------------------------------------------------------------ //
+
 export async function getIssues(query: IssueQuery) {
   const { page, limit, skip } = parsePagination(query as Record<string, string>);
   const filter = buildFilter(query);
@@ -95,18 +94,18 @@ export async function getIssues(query: IssueQuery) {
   };
 }
 
-// ------------------------------------------------------------------ //
+
 //  SINGLE
-// ------------------------------------------------------------------ //
+
 export async function getIssueById(id: string) {
   const doc = await Issue.findById(id).populate(POPULATE);
   if (!doc) throw Object.assign(new Error('Issue not found.'), { statusCode: 404 });
   return formatIssue(doc);
 }
 
-// ------------------------------------------------------------------ //
+
 //  CREATE
-// ------------------------------------------------------------------ //
+
 export async function createIssue(input: CreateIssueInput) {
   const doc = await Issue.create({
     title:       input.title,
@@ -120,9 +119,9 @@ export async function createIssue(input: CreateIssueInput) {
   return getIssueById(doc._id.toString());
 }
 
-// ------------------------------------------------------------------ //
+
 //  UPDATE
-// ------------------------------------------------------------------ //
+
 export async function updateIssue(id: string, input: UpdateIssueInput) {
   const doc = await Issue.findByIdAndUpdate(
     id,
@@ -134,9 +133,9 @@ export async function updateIssue(id: string, input: UpdateIssueInput) {
   return formatIssue(doc);
 }
 
-// ------------------------------------------------------------------ //
+
 //  PATCH STATUS
-// ------------------------------------------------------------------ //
+
 export async function updateIssueStatus(id: string, status: IssueStatus) {
   const doc = await Issue.findByIdAndUpdate(
     id,
@@ -148,17 +147,17 @@ export async function updateIssueStatus(id: string, status: IssueStatus) {
   return formatIssue(doc);
 }
 
-// ------------------------------------------------------------------ //
+
 //  DELETE
-// ------------------------------------------------------------------ //
+
 export async function deleteIssue(id: string) {
   const doc = await Issue.findByIdAndDelete(id);
   if (!doc) throw Object.assign(new Error('Issue not found.'), { statusCode: 404 });
 }
 
-// ------------------------------------------------------------------ //
+
 //  STATS
-// ------------------------------------------------------------------ //
+
 export async function getIssueCounts() {
   const rows = await Issue.aggregate<{ _id: string; count: number }>([
     { $group: { _id: '$status', count: { $sum: 1 } } },
@@ -176,9 +175,9 @@ export async function getIssueCounts() {
   return counts;
 }
 
-// ------------------------------------------------------------------ //
+
 //  EXPORT (all matching, no pagination)
-// ------------------------------------------------------------------ //
+
 export async function exportIssues(query: IssueQuery) {
   const filter = buildFilter(query);
   const docs   = await Issue.find(filter).populate(POPULATE).sort({ createdAt: -1 });

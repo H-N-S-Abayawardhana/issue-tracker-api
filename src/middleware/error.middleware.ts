@@ -4,7 +4,7 @@ interface AppError extends Error {
   statusCode?: number;
 }
 
-// Must have 4 parameters — Express recognises it as an error handler
+// Must have 4 parameters
 export function errorHandler(
   err:  AppError,
   _req: Request,

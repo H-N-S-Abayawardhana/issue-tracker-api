@@ -3,8 +3,6 @@ import { body, param, ValidationChain }    from 'express-validator';
 import * as issueService                   from '../services/issue.service';
 import { sendSuccess }                     from '../utils/response';
 
-// ---- Validation rule chains ----
-
 export const createRules: ValidationChain[] = [
   body('title')
     .trim()

@@ -7,7 +7,6 @@ const router = Router();
 
 router.use(authenticate);
 
-// Stats + export must come BEFORE /:id to avoid being captured by the param route
 router.get('/stats/counts', ctrl.getStats);
 router.get('/export/json',  ctrl.exportJson);
 router.get('/export/csv',   ctrl.exportCsv);

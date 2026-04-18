@@ -3,7 +3,6 @@ import { body, ValidationChain }           from 'express-validator';
 import * as authService                    from '../services/auth.service';
 import { sendSuccess }                     from '../utils/response';
 
-// ---- Validation rule chains ----
 
 export const registerRules: ValidationChain[] = [
   body('name')
@@ -29,8 +28,6 @@ export const loginRules: ValidationChain[] = [
   body('password')
     .notEmpty().withMessage('Password is required.'),
 ];
-
-// ---- Handlers ----
 
 export async function register(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
