@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import { verifyToken, JwtPayload }         from '../config/jwt';
 import { sendError }                        from '../utils/response';
 
-// Extend Express Request so controllers can access req.user
 declare global {
   namespace Express {
     interface Request {

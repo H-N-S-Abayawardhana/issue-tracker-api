@@ -10,8 +10,6 @@ export interface JwtPayload {
 }
 
 export function signToken(payload: JwtPayload): string {
-  // Cast expiresIn to any to satisfy the overloaded jwt.sign typings
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return jwt.sign(payload, SECRET, { expiresIn: EXPIRES_IN } as any);
 }
 

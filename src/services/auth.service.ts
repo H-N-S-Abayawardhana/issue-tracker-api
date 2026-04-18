@@ -22,7 +22,6 @@ export async function registerUser({ name, email, password }: RegisterInput) {
 }
 
 export async function loginUser({ email, password }: LoginInput) {
-  // Include password_hash in this query (excluded by toJSON transform normally)
   const doc = await User.findOne({ email }).select('+password_hash');
   if (!doc) {
     throw Object.assign(new Error('Invalid email or password.'), { statusCode: 401 });
