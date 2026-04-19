@@ -23,6 +23,7 @@ export const createRules: ValidationChain[] = [
     .optional({ nullable: true })
     .isIn(['Minor', 'Major', 'Critical'])
     .withMessage('Invalid severity.'),
+  body('assigned_to').optional({ nullable: true }).isMongoId().withMessage('Invalid assignee ID.'),
 ];
 
 export const updateRules: ValidationChain[] = [
@@ -45,6 +46,7 @@ export const updateRules: ValidationChain[] = [
     .optional({ nullable: true })
     .isIn(['Minor', 'Major', 'Critical'])
     .withMessage('Invalid severity.'),
+  body('assigned_to').optional({ nullable: true }).isMongoId().withMessage('Invalid assignee ID.'),
 ];
 
 export const statusRules: ValidationChain[] = [
