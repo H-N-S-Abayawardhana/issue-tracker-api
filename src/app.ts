@@ -1,17 +1,14 @@
-import 'dotenv/config';
-import express       from 'express';
-import cors          from 'cors';
-import routes        from './routes/index';
+import express from 'express';
+import cors from 'cors';
+import { env } from './config/env';
+import routes from './routes/index';
 import { errorHandler } from './middleware/error.middleware';
 
 const app = express();
 
 app.use(
   cors({
-    origin: [
-      'http://localhost:5173',
-      'https://issuetrackapp.vercel.app',
-    ],
+    origin: env.FRONTEND_URLS,
     credentials: true,
   })
 );

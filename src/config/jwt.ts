@@ -1,18 +1,17 @@
-import jwt from 'jsonwebtoken';
-
-const SECRET     = process.env.JWT_SECRET     || 'changeme';
-const EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import { env } from './env';
 
 export interface JwtPayload {
-  id:    string;
+  id: string;
   email: string;
-  name:  string;
+  name: string;
 }
 
 export function signToken(payload: JwtPayload): string {
-  return jwt.sign(payload, SECRET, { expiresIn: EXPIRES_IN } as any);
+  const options: SignOptions = { expiresIn: env.JWT_EXPIRES_IN as SignOptions['expiresIn'] };
+  return jwt.sign(payload, env.JWT_SECRET, options);
 }
 
 export function verifyToken(token: string): JwtPayload {
-  return jwt.verify(token, SECRET) as JwtPayload;
+  return jwt.verify(token, env.JWT_SECRET) as JwtPayload;
 }

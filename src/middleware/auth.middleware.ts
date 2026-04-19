@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyToken, JwtPayload }         from '../config/jwt';
-import { sendError }                        from '../utils/response';
+import { verifyToken, JwtPayload } from '../config/jwt';
+import { sendError } from '../utils/response';
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       user?: JwtPayload;
