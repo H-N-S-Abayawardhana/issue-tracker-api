@@ -6,16 +6,18 @@ interface AppError extends Error {
 
 // Must have 4 parameters
 export function errorHandler(
-  err:  AppError,
+  err: AppError,
   _req: Request,
-  res:  Response,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  res: Response,
   _next: NextFunction
 ): void {
+  const statusCode = err.statusCode ?? 500;
+
   console.error('[Error]', err);
 
-  res.status(err.statusCode || 500).json({
+  const isOperational = statusCode < 500;
+  res.status(statusCode).json({
     success: false,
-    message: err.message || 'Internal server error',
+    message: isOperational ? err.message : 'Internal server error',
   });
 }
